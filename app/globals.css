@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fbf8ee;
+  --color-card: #fffdf6;
+  --color-ink: #38342a;
+  --color-ink-soft: #5c564a;
+  --color-brand-blue: #435c7e;
+  --color-rust: #c93d12;
+  --color-gold: #ddb13a;
+  /* accent colors sampled from the logo's interlocking rings */
+  --color-ring-teal: #2eb999;
+  --color-ring-green: #93ac72;
+  --color-ring-purple: #8a5e91;
+  --color-ring-orange: #ef7f3a;
+  --font-serif: "Iowan Old Style", Palatino, Georgia, serif;
+  --font-hand: var(--font-caveat), "Bradley Hand", "Segoe Print", cursive;
+}
+
+body {
+  background:
+    linear-gradient(rgba(67, 92, 126, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 92, 126, 0.1) 1px, transparent 1px),
+    var(--color-paper);
+  background-size: 26px 26px;
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+}
+
+/* sticky header strip — same graph-paper texture as the body so it reads
+   as part of the page at the top and as a notebook strip once stuck */
+.header-bar {
+  background:
+    linear-gradient(rgba(67, 92, 126, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 92, 126, 0.1) 1px, transparent 1px),
+    var(--color-paper);
+  background-size: 26px 26px;
+}
+
+/* keep anchored sections (e.g. /facilities#wood-shop) clear of the header */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* red margin rule down the left edge of the notebook page */
+.notebook-rule::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 56px;
+  width: 2px;
+  background: rgba(201, 61, 18, 0.4);
+}
+@media (max-width: 640px) {
+  .notebook-rule::before {
+    left: 30px;
+  }
+}
+
+/* strip of tape holding the card to the page */
+.tape::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 96px;
+  height: 24px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(221, 177, 58, 0.4);
+  border: 1px solid rgba(56, 52, 42, 0.08);
+}
+
+/* hand-drawn highlighter behind key words — one stroke per marker color */
+.hl {
+  background: linear-gradient(transparent 68%, rgba(221, 177, 58, 0.55) 68%);
+}
+.hl-teal {
+  background: linear-gradient(transparent 68%, rgba(46, 185, 153, 0.35) 68%);
+}
+.hl-green {
+  background: linear-gradient(transparent 68%, rgba(147, 172, 114, 0.45) 68%);
+}
+.hl-purple {
+  background: linear-gradient(transparent 68%, rgba(138, 94, 145, 0.3) 68%);
+}
+
+/* mobile menu card entrance */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* taped-in photograph */
+.photo {
+  background: var(--color-card);
+  border: 1px solid rgba(56, 52, 42, 0.18);
+  box-shadow: 3px 4px 0 rgba(56, 52, 42, 0.12);
+  padding: 8px 8px 12px;
+}
+
+/* long-form article/page body (rendered markdown and page prose) */
+.prose-note {
+  font-size: 17px;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+.prose-note p {
+  margin: 0 0 1.1em;
+}
+.prose-note h2,
+.prose-note h3,
+.prose-note h4 {
+  margin: 1.6em 0 0.5em;
+  line-height: 1.25;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.prose-note h2 {
+  font-size: 26px;
+}
+.prose-note h3 {
+  font-size: 21px;
+}
+.prose-note h4 {
+  font-size: 18px;
+  font-style: italic;
+}
+.prose-note a {
+  color: var(--color-brand-blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(67, 92, 126, 0.5);
+  text-underline-offset: 3px;
+}
+.prose-note ul,
+.prose-note ol {
+  margin: 0 0 1.1em;
+  padding-left: 22px;
+}
+.prose-note ul {
+  list-style: disc;
+}
+.prose-note ol {
+  list-style: decimal;
+}
+.prose-note li {
+  margin: 0.3em 0;
+}
+.prose-note blockquote {
+  margin: 1.4em 0;
+  padding-left: 16px;
+  border-left: 3px solid rgba(201, 61, 18, 0.4);
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+.prose-note img {
+  display: block;
+  margin: 1.8em 0;
+  max-width: 100%;
+  height: auto;
+  background: var(--color-card);
+  border: 1px solid rgba(56, 52, 42, 0.18);
+  box-shadow: 3px 4px 0 rgba(56, 52, 42, 0.12);
+  padding: 8px;
+  transform: rotate(-0.4deg);
+}
+.prose-note hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid rgba(56, 52, 42, 0.25);
+}
